@@ -7,37 +7,21 @@
 
     <html>
     <head>
-        <title>Person Management Screen</title>
-        <link rel="stylesheet"
-              href="/resources/styles.css"
-              type="text/css"/>
+        <title>Іграшковий магазин</title>
     </head>
     <body>
+
     <div align="center">
-
-
-        <h1 class="title">Add an Order</h1>
-
-
-
-
-        <h1>
-            <a href="/newPersonsOrder">New Order Register</a><br>
-            <a href="/newPizza">New Pizza Register</a>
-        </h1>
-
-        <h1 class="title">List of Orders</h1>
-
         <table border="1">
 
-            <th>Order number</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Address</th>
-            <th>Telephone</th>
-            <th>Order</th>
-            <th>Total</th>
-            <th>Action</th>
+            <th>Номер</th>
+            <th>Ім'я</th>
+            <th>Імейл</th>
+            <th>Адреса</th>
+            <th>Телефон</th>
+            <th>Замовлення</th>
+            <th>Всього</th>
+            <th>Операція</th>
             <c:forEach var="order" items="${orders}">
                 <tr>
 
@@ -51,9 +35,9 @@
                         <table border="1">
 
                                 <tr>
-                                    <c:forEach var="pizza" items="${order.pizzas}">
+                                    <c:forEach var="toy" items="${order.toys}">
                                     <td>
-                                            ${pizza.name}
+                                            ${toy.name}
                                     </td>
                                     </c:forEach>
                                 </tr>
@@ -64,13 +48,24 @@
                         ${order.total}
                     </td>
                     <td>
-                        <a href="deleteOrder?id=${order.orderId}&id2=${order.person.id}">Delete Order</a>
+                        <a href="deleteOrder?id=${order.orderId}&id2=${order.person.id}">видалити</a>
                     </td>
 
 
                 </tr>
             </c:forEach>
 
+            <div class="text">
+                <h1 class="title">Управління контентом</h1>
+
+
+
+
+                <h2>
+                    <a href="/newPersonsOrder">Додати нове замовлення</a><br>
+                    <a href="/newToy">Додати новий товар</a>
+                </h2>
+            </div>
 
 
 

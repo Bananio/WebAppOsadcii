@@ -7,25 +7,22 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>New Order</title>
-    <link rel="stylesheet"
-          href="/resources/styles.css"
-          type="text/css"/>
+    <title>Нове замовлення</title>
 </head>
 <body>
 <div align="center">
-    <h1>New Order</h1>
+    <h1>Замовлення</h1>
     <form:form action="savePersonsOrder" method="get" modelAttribute="person">
         <table border="1">
             <th></th>
-            <th>Pizza</th>
-            <th>Price</th>
-            <c:forEach var="pizza" items="${pizzas}">
+            <th>Товар</th>
+            <th>Ціна</th>
+            <c:forEach var="toy" items="${toys}">
 
                 <tr>
-                    <td><input type="checkbox" name="selected" value="${pizza.name}"></td>
-                    <td>${pizza.name}</td>
-                    <td>${pizza.price}</td>
+                    <td><input type="checkbox" name="selected" value="${toy.name}"></td>
+                    <td>${toy.name}</td>
+                    <td>${toy.price}</td>
                 </tr>
 
             </c:forEach>
@@ -33,23 +30,23 @@
         <table>
             <form:hidden path="id"/>
             <tr>
-                <td>Name:</td>
+                <td>Ім'я:</td>
                 <td><form:input path="name" /></td>
             </tr>
             <tr>
-                <td>Email:</td>
+                <td>Імейл:</td>
                 <td><form:input path="email" /></td>
             </tr>
             <tr>
-                <td>Address:</td>
+                <td>Адреса:</td>
                 <td><form:input path="address" /></td>
             </tr>
             <tr>
-                <td>Telephone:</td>
+                <td>Телефон:</td>
                 <td><form:input path="telephone" /></td>
             </tr>
             <tr>
-                <td colspan="2" align="center"><input type="submit" value="Save"></td>
+                <td colspan="2" align="center"><input type="submit" value="Зберегти"></td>
             </tr>
         </table>
     </form:form>

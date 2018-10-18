@@ -13,8 +13,8 @@ public class PersonsOrder {
     private Double total;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE} , fetch = FetchType.EAGER)
-    @JoinTable(name = "ORDER_PIZZAS", joinColumns = {@JoinColumn(name = "ORDER_ID")},inverseJoinColumns = {@JoinColumn(name = "PIZZAS_ID")})
-    private Set<Pizza> pizzas;
+    @JoinTable(name = "ORDER_TOYS", joinColumns = {@JoinColumn(name = "ORDER_ID")},inverseJoinColumns = {@JoinColumn(name = "TOYS_ID")})
+    private Set<Toy> toys;
 
     @OneToOne
     private Person person;
@@ -35,12 +35,12 @@ public class PersonsOrder {
         this.total = total;
     }
 
-    public Set<Pizza> getPizzas() {
-        return pizzas;
+    public Set<Toy> getToys() {
+        return toys;
     }
 
-    public void setPizzas(Set<Pizza> pizzas) {
-        this.pizzas = pizzas;
+    public void setToys(Set<Toy> toys) {
+        this.toys = toys;
     }
 
     public Person getPerson() {

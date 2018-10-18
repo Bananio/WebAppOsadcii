@@ -2,10 +2,10 @@ package ua.osadchii.controller;
 
 import ua.osadchii.model.Person;
 import ua.osadchii.model.PersonsOrder;
-import ua.osadchii.model.Pizza;
+import ua.osadchii.model.Toy;
 import ua.osadchii.service.PersonService;
 import ua.osadchii.service.PersonsOrderService;
-import ua.osadchii.service.PizzaService;
+import ua.osadchii.service.ToyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +30,7 @@ public class MainController {
     @Autowired
     private PersonService personService;
     @Autowired
-    private PizzaService pizzaService;
+    private ToyService toyService;
     @Autowired
     private PersonsOrderService personsOrderService;
 
@@ -42,11 +42,11 @@ public class MainController {
 
 
 
-    @RequestMapping(value = "/newPizza", method = RequestMethod.GET)
-    public ModelAndView newPizza(ModelAndView model) {
-        Pizza pizza = new Pizza();
-        model.addObject("pizza", pizza);
-        model.setViewName("PizzaForm");
+    @RequestMapping(value = "/newToy", method = RequestMethod.GET)
+    public ModelAndView newToy(ModelAndView model) {
+        Toy toy = new Toy();
+        model.addObject("toy", toy);
+        model.setViewName("ToyForm");
         return model;
     }
 
@@ -54,20 +54,20 @@ public class MainController {
     public ModelAndView newPersonsOrder(ModelAndView model) {
         PersonsOrder personsOrder = new PersonsOrder();
         Person person = new Person();
-        model.addObject("pizzas", pizzaService.getAllPizzas());
+        model.addObject("toys", toyService.getAllToys());
         model.addObject("personsOrder", personsOrder);
         model.addObject("person",person);
         model.setViewName("PersonsOrderForm");
         return model;
     }
 
-    @RequestMapping(value = "/savePizza", method = RequestMethod.POST)
-    public ModelAndView savePizza(@ModelAttribute Pizza pizza) {
-        if (pizza.getId() == 0) { // if person id is 0 then creating the
+    @RequestMapping(value = "/saveToy", method = RequestMethod.POST)
+    public ModelAndView saveToy(@ModelAttribute Toy toy) {
+        if (toy.getId() == 0) { // if person id is 0 then creating the
             // person other updating the person
-            pizzaService.addPizza(pizza);
+            toyService.addToy(toy);
         } else {
-           pizzaService.updatePizza(pizza);
+           toyService.updateToy(toy);
         }
         return new ModelAndView("redirect:/");
     }
@@ -78,7 +78,7 @@ public class MainController {
         PersonsOrder personsOrder = new PersonsOrder();
         personsOrder.setPerson(personService.getPerson(person.getId()));
         String selectedStudentIds[] = request.getParameterValues("selected");
-        Set<Pizza> pizzas = new HashSet<>();
+        Set<Toy> toys = new HashSet<>();
         if (selectedStudentIds != null && selectedStudentIds.length != 0) {
             System.out.println("You have selected: ");
             for (int i = 0; i < selectedStudentIds.length; i++) {
@@ -86,13 +86,13 @@ public class MainController {
             }
         }
 
-        for (String  pizzaName:selectedStudentIds){
-            pizzas.add(pizzaService.getPizza(pizzaName));
+        for (String  toyName:selectedStudentIds){
+            toys.add(toyService.getToy(toyName));
         }
-        personsOrder.setPizzas(pizzas);
+        personsOrder.setToys(toys);
         Double total = 0.0;
-        for (String  pizzaName:selectedStudentIds){
-           total = total + (pizzaService.getPizza(pizzaName).getPrice());
+        for (String  toyName:selectedStudentIds){
+           total = total + (toyService.getToy(toyName).getPrice());
         }
         personsOrder.setTotal(total);
 
